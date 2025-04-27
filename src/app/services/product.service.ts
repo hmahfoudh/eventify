@@ -36,13 +36,8 @@ export class ProductService {
   }
 
   // Get all products from the backend
-  getProducts(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
-      catchError((err) => {
-        console.error('Error fetching products:', err);
-        return throwError(() => new Error('Failed to fetch products'));
-      })
-    );
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl);
   }
 
   // Method to fetch product by name

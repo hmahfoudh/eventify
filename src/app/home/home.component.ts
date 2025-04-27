@@ -8,7 +8,9 @@ import { ProductService } from '../services/product.service'; // Adjust the path
 })
 export class HomeComponent implements OnInit {
 
-  products: any[] = [];
+  public products: any[] = [];
+  public imageUrl: string = 'http://localhost:8080'; // Base URL for product images
+
 
   constructor(private productService: ProductService) {}
 
@@ -16,21 +18,6 @@ export class HomeComponent implements OnInit {
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data; // Store the product list
-        // After loading products, get images for each product
-        this.products.forEach(product => {
-          // Fetch image data by calling the backend for each product
-          this.productService.getProductImage(product.name).subscribe({
-            next: (response) => {
-              // Assuming the response contains both image data and image name
-              const imageData = response.imageData;
-              // Converting byte array to base64 string
-              product.imageUrl = `data:image/jpeg;base64,${imageData}`;
-            },
-            error: (err) => {
-              console.error('Error fetching product image:', err);
-            }
-          });
-        });
       },
       error: (err) => {
         console.error('Error fetching products:', err);
