@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-// Define the structure of the Category object
-export interface Category {
-  id: number;
-  name: string;
-}
+import { Category } from '../models/category';
 
 @Injectable({
   providedIn: 'root'

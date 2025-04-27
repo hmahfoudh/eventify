@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { CategoryService } from '../services/category.service'; // CategoryService is needed for fetching categories
+import { Product } from '../models/product';
+import { Category } from '../models/category';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -9,24 +12,22 @@ import { CategoryService } from '../services/category.service'; // CategoryServi
   styleUrls: ['./product-edit.component.scss']
 })
 export class ProducteditComponent implements OnInit {
-  product = {
-    name: '',
-    description: '',
-    basePrice: 0,
-    stockQuantity: 0,
-    category: '' // Make category an empty string instead of an object
-  };
 
-  selectedImage: File | null = null;
-  categories: any[] = []; // Array to store fetched categories
+
+  selectedImages: File [] = [];
+  categories: Category[] = []; 
+
+  public productForm: FormGroup
+
+  public product: Product;
 
   constructor(
     private productService: ProductService,
-    private categoryService: CategoryService // Inject CategoryService
-  ) {}
+    private categoryService: CategoryService,
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
-    // Fetch categories on component initialization
     this.categoryService.getCategories().subscribe({
       next: (data) => {
         this.categories = data; // Populate the categories array with the response from the API
@@ -35,21 +36,39 @@ export class ProducteditComponent implements OnInit {
         console.error('Error loading categories:', err);
       }
     });
+
+    this.initForm();
   }
 
   onImageSelected(event: Event) {
+    this.selectedImages = [];
     const fileInput = event.target as HTMLInputElement;
-    this.selectedImage = fileInput.files?.[0] || null;
+    console.log(fileInput.files)
+    if (!fileInput.files || fileInput.files.length === 0) {
+      console.error('No file selected!');
+      return;
+    }
+    for(let i=0; i<=fileInput.files.length; i++){
+      this.selectedImages.push(fileInput.files?.[i]);
+    }
+    
   }
 
   saveProduct() {
-    if (!this.selectedImage) {
+    console.log('product form:', this.productForm);
+    if(!this.productForm.valid){
+      return ;
+    }
+    if (!this.selectedImages) {
       console.error('No image selected!');
       return;
     }
 
+    this.product = this.productForm.value;
+    this.product.productImages = [];
+
     // Call service with the product data and selected image
-    this.productService.saveProduct(this.product, this.selectedImage).subscribe({
+    this.productService.saveProduct(this.product, this.selectedImages).subscribe({
       next: (res) => {
         console.log('Product saved successfully!', res);
         // Handle success (e.g., navigation or message)
@@ -60,4 +79,16 @@ export class ProducteditComponent implements OnInit {
       }
     });
   }
+
+  private initForm() {
+    this.productForm = this.fb.group({
+      name: [''],
+      description: [''],
+      stockQuantity: [0],
+      basePrice: [0],
+      category: [null],
+      productImages: [[]]
+    });
+  }
+
 }

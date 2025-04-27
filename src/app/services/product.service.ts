@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,14 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   // Method to save a product
-  saveProduct(productData: any, imageFile: File): Observable<any> {
+  saveProduct(productData: Product, imageFile: File[]): Observable<any> {
     const formData = new FormData();
-
-    // Append product as JSON blob
-    const productBlob = new Blob([JSON.stringify(productData)], { type: 'application/json' });
-    formData.append('product', productBlob);
+    formData.append('product', JSON.stringify(productData));
 
     // Append image file
-    formData.append('imageFile', imageFile, imageFile.name);
+    imageFile.forEach((file) => {
+      formData.append('images', file);
+    });
 
     // Debug: Log FormData contents
     formData.forEach((value, key) => {

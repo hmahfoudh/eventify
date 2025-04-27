@@ -1,44 +1,45 @@
-<form (ngSubmit)="saveProduct()" enctype="multipart/form-data">
+<form [formGroup]="productForm">
   <div>
     <label>Name:</label>
-    <input type="text" [(ngModel)]="product.name" name="name" required />
+    <input type="text" formControlName="name" name="name" required />
   </div>
 
   <div>
     <label>Description:</label>
-    <textarea [(ngModel)]="product.description" name="description"></textarea>
+    <textarea formControlName="description" name="description"></textarea>
   </div>
 
   <div>
     <label>Base Price:</label>
-    <input type="number" step="0.01" [(ngModel)]="product.basePrice" name="basePrice" required />
+    <input type="number" step="0.01" formControlName="basePrice" name="basePrice" required />
   </div>
 
   <div>
     <label>Stock Quantity:</label>
-    <input type="number" [(ngModel)]="product.stockQuantity" name="stockQuantity" required />
+    <input type="number" formControlName="stockQuantity" name="stockQuantity" required />
   </div>
   
   <div class="form-group">
     <label for="category">Category</label>
-    <select id="category" class="form-control" [(ngModel)]="product.category" name="category">
-      <option *ngFor="let category of categories" [value]="category">{{ category.name }}</option>
+    <select id="category" class="form-control" formControlName="category" name="category">
+      <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
     </select>
   </div>
   
 
   <input
+  formControlName="productImages"
   id="imageInput"
   type="file"
   (change)="onImageSelected($event)"
   accept="image/*"
-  required
+  multiple
 />
 
   
   
 
-  <button type="submit">Save the product</button>
+  <button type="submit" (click)="saveProduct()">Save the product</button>
 </form>
 
   
