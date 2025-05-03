@@ -11,6 +11,7 @@ import { HttpClientModule, withFetch } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProducteditComponent } from './product-edit/product-edit.component';  
 import { ProductService } from './services/product.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
  
@@ -24,6 +25,7 @@ import { ProductService } from './services/product.service';
     LoginComponent,
     SignupComponent,
     ProducteditComponent,
+    
    
   ],
   imports: [
@@ -31,7 +33,8 @@ import { ProductService } from './services/product.service';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     provideClientHydration(), 

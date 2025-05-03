@@ -8,7 +8,6 @@ export interface SignupRequest {
   username: string;
   email: string;
   password: string;
-  
 }
 
 export interface LoginRequest {
@@ -29,13 +28,12 @@ export interface JwtResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private authUrl = 'http://localhost:8080/api/auth'; // replace with your backend URL if different
+  private authUrl = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) {}
 
   /**
    * Sends a signup request to the backend
-   * @param data SignupRequest
    */
   register(data: SignupRequest): Observable<any> {
     return this.http.post(`${this.authUrl}/signup`, data);
@@ -43,51 +41,61 @@ export class AuthService {
 
   /**
    * Sends a login request to the backend
-   * @param data LoginRequest
    */
   login(data: LoginRequest): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(`${this.authUrl}/signin`, data);
   }
 
   /**
-   * Logs the user out by clearing the token
+   * Logs out by clearing token and user data
    */
   logout(): void {
-    window.localStorage.removeItem('auth-token');
-    window.localStorage.removeItem('auth-user');
+    localStorage.removeItem('auth-token');
+    localStorage.removeItem('auth-user');
   }
 
   /**
-   * Stores token in localStorage
-   * @param token string
+   * Save JWT token to localStorage
    */
   saveToken(token: string): void {
-    window.localStorage.setItem('auth-token', token);
+    localStorage.setItem('auth-token', token);
   }
 
   /**
-   * Gets token from localStorage
+   * Get JWT token from localStorage
    */
   getToken(): string | null {
-    return window.localStorage.getItem('auth-token');
+    return localStorage.getItem('auth-token');
   }
 
   /**
-   * Stores user info in localStorage
-   * @param user any
+   * Save user details (including id) to localStorage
    */
-  saveUser(user: any): void {
-    window.localStorage.setItem('auth-user', JSON.stringify(user));
+  saveUser(user: JwtResponse): void {
+    const userToStore = {
+      token: user.token,     // Save token
+      type: user.type,       // Save token type
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      roles: user.roles
+    };
+    localStorage.setItem('auth-user', JSON.stringify(userToStore));
   }
+  
 
   /**
-   * Retrieves user info from localStorage
+   * Get user details from localStorage
    */
   getUser(): any {
-    const user = window.localStorage.getItem('auth-user');
-    if (user) {
-      return JSON.parse(user);
-    }
-    return null;
+    const user = localStorage.getItem('auth-user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  /**
+   * Get user ID directly
+   */
+  getUserId(): number | null {
+    return this.getUser()?.id ?? null;
   }
 }
