@@ -19,9 +19,13 @@ export class LocalStorageService {
     return this.getToken() !== null;
   }
 
-  public getToken(): string | null {
-    return localStorage.getItem(TOKEN);
+  getToken(): string | null {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('auth-token');
+    }
+    return null;
   }
+  
 
   public saveUser(user: any): void {
     window.localStorage.removeItem(USER);

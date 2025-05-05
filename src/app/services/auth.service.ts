@@ -16,8 +16,8 @@ export interface LoginRequest {
 }
 
 export interface JwtResponse {
-  token: string;
-  type: string;
+  accessToken: string;
+  tokenType: string;
   id: number;
   username: string;
   email: string;
@@ -65,7 +65,11 @@ export class AuthService {
    * Get JWT token from localStorage
    */
   getToken(): string | null {
-    return localStorage.getItem('auth-token');
+    // Ensure code only runs in the browser (not on the server)
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('auth-token');
+    }
+    return null;  // Return null if not in browser (e.g., SSR context)
   }
 
   /**
@@ -73,8 +77,8 @@ export class AuthService {
    */
   saveUser(user: JwtResponse): void {
     const userToStore = {
-      token: user.token,     // Save token
-      type: user.type,       // Save token type
+      token: user.accessToken,     // ✅ was user.token
+      type: user.tokenType,        // ✅ was user.type
       id: user.id,
       username: user.username,
       email: user.email,
@@ -82,6 +86,7 @@ export class AuthService {
     };
     localStorage.setItem('auth-user', JSON.stringify(userToStore));
   }
+  
   
 
   /**
