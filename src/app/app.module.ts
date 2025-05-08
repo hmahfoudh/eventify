@@ -7,13 +7,12 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule, withFetch } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProducteditComponent } from './product-edit/product-edit.component';  
 import { ProductService } from './services/product.service';
-
-
- 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { authInterceptorProviders } from './auth.interceptor'; // ✅ Interceptor provider
 
 @NgModule({
   declarations: [
@@ -24,18 +23,19 @@ import { ProductService } from './services/product.service';
     LoginComponent,
     SignupComponent,
     ProducteditComponent,
-   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
-    provideClientHydration(), 
+    provideClientHydration(),
     ProductService,
+    authInterceptorProviders // ✅ Registering the interceptor here only
   ],
   bootstrap: [AppComponent]
 })
