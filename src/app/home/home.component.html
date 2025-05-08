@@ -130,30 +130,30 @@
               <div class="swiper-slide">
                 <div class="d-flex flex-column gap-3 gap-lg-4">
                   <div class="d-flex align-items-center position-relative bg-body-tertiary rounded overflow-hidden animate-underline">
-                    <img src="/assets/img/shop/fashion/thumbs/01.png" width="110" alt="Thumbnail">
+                    <img src="/assets/img/home/fashion/v1/popular/balloon1.png" width="110" alt="Thumbnail">
                     <div class="nav flex-column gap-2 min-w-0 p-3">
                       <a class="nav-link text-dark-emphasis stretched-link w-100 min-w-0 p-0" href="shop-product-fashion.html">
-                        <span class="animate-target text-truncate">Short jacket in long-pile faux fur</span>
+                        <span class="animate-target text-truncate">Balloons</span>
                       </a>
-                      <div class="h6 mb-0">$218.00</div>
+                      <div class="h6 mb-0">10 TND</div>
                     </div>
                   </div>
                   <div class="d-flex align-items-center position-relative bg-body-tertiary rounded overflow-hidden animate-underline">
-                    <img src="/assets/img/shop/fashion/thumbs/02.png" width="110" alt="Thumbnail">
+                    <img src="/assets/img/home/fashion/v1/popular/flowers.png" width="110" alt="Thumbnail">
                     <div class="nav flex-column gap-2 min-w-0 p-3">
                       <a class="nav-link text-dark-emphasis stretched-link w-100 min-w-0 p-0" href="shop-product-fashion.html">
-                        <span class="animate-target text-truncate">Women's walking shoes tennis sneakers</span>
+                        <span class="animate-target text-truncate">Flowers</span>
                       </a>
-                      <div class="h6 mb-0">$54.99</div>
+                      <div class="h6 mb-0">35 TND</div>
                     </div>
                   </div>
                   <div class="d-flex align-items-center position-relative bg-body-tertiary rounded overflow-hidden animate-underline">
-                    <img src="/assets/img/shop/fashion/thumbs/03.png" width="110" alt="Thumbnail">
+                    <img src="/assets/img/home/fashion/v1/popular/vase1.png" width="110" alt="Thumbnail">
                     <div class="nav flex-column gap-2 min-w-0 p-3">
                       <a class="nav-link text-dark-emphasis stretched-link w-100 min-w-0 p-0" href="shop-product-fashion.html">
-                        <span class="animate-target text-truncate">Classic aviator sunglasses for women</span>
+                        <span class="animate-target text-truncate">Vase</span>
                       </a>
-                      <div class="h6 mb-0">$76.00</div>
+                      <div class="h6 mb-0">40 TND</div>
                     </div>
                   </div>
                 </div>
@@ -210,7 +210,7 @@
             <div class="swiper-slide">
               <div class="ratio d-none d-md-block" style="--cz-aspect-ratio: calc(720 / 636 * 100%)"></div>
               <div class="ratio ratio-4x3 d-md-none"></div>
-              <img src="/assets/img/home/fashion/v1/popular/01.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover rounded-5" alt="Image">
+              <img src="/assets/img/home/fashion/v1/popular/birthday.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover rounded-5" alt="Image">
             </div>
             <div class="swiper-slide">
               <div class="ratio d-none d-md-block" style="--cz-aspect-ratio: calc(720 / 636 * 100%)"></div>
@@ -250,46 +250,55 @@
     <!-- Products grid -->
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 gy-4 gy-md-5 pb-xxl-3">
       @for (product of products; track $index) {
-<!-- Item -->
-<div class="col mb-2 mb-sm-3 mb-md-0">
-  <div class="animate-underline hover-effect-opacity">
-    <div class="position-relative mb-3">
-      <span class="badge text-bg-danger position-absolute top-0 start-0 z-2 mt-2 mt-sm-3 ms-2 ms-sm-3">Sale</span>
-      <button type="button" class="btn btn-icon btn-secondary animate-pulse fs-base bg-transparent border-0 position-absolute top-0 end-0 z-2 mt-1 mt-sm-2 me-1 me-sm-2" aria-label="Add to Wishlist">
-        <i class="ci-heart animate-target"></i>
-      </button>
-      <a class="d-flex bg-body-tertiary rounded p-3" href="shop-product-fashion.html">
-        <div class="ratio" style="--cz-aspect-ratio: calc(308 / 274 * 100%)">
-          <img [src]="imageUrl+product?.productImages[0]?.url" alt="Image">
-        </div>
-      </a>
-      <div class="hover-effect-target position-absolute start-0 bottom-0 w-100 z-2 opacity-0 pb-2 pb-sm-3 px-2 px-sm-3">
-        <div class="d-flex align-items-center justify-content-center gap-2 gap-xl-3 bg-body rounded-2 p-2">
-          <span class="fs-xs fw-medium text-secondary-emphasis py-1 px-sm-2">XS</span>
-          <span class="fs-xs fw-medium text-secondary-emphasis py-1 px-sm-2">S</span>
-          <span class="fs-xs fw-medium text-secondary-emphasis py-1 px-sm-2">M</span>
-          <span class="fs-xs fw-medium text-secondary-emphasis py-1 px-sm-2">L</span>
-          <div class="nav">
-            <a class="nav-link fs-xs text-body-tertiary py-1 px-2" href="shop-product-fashion.html">+3</a>
+        <!-- Item -->
+        <div class="col mb-2 mb-sm-3 mb-md-0">
+          <div class="animate-underline hover-effect-opacity">
+            <div class="position-relative mb-3">
+              <!-- Remove the Sale badge if not needed -->
+              <span class="badge text-bg-danger position-absolute top-0 start-0 z-2 mt-2 mt-sm-3 ms-2 ms-sm-3">Sale</span>
+              
+              <!-- Removed the heart icon button -->
+              <!-- <button type="button" class="btn btn-icon btn-secondary animate-pulse fs-base bg-transparent border-0 position-absolute top-0 end-0 z-2 mt-1 mt-sm-2 me-1 me-sm-2" aria-label="Add to Wishlist">
+                <i class="ci-heart animate-target"></i>
+              </button> -->
+              
+              <a class="d-flex bg-body-tertiary rounded p-3" href="shop-product-fashion.html">
+                <div class="ratio" style="--cz-aspect-ratio: calc(308 / 274 * 100%)">
+                  <img [src]="imageUrl+product?.productImages[0]?.url" alt="Image">
+                </div>
+              </a>
+    
+              <!-- Removed the size options (XS, S, M, L) block -->
+              <!-- <div class="hover-effect-target position-absolute start-0 bottom-0 w-100 z-2 opacity-0 pb-2 pb-sm-3 px-2 px-sm-3">
+                <div class="d-flex align-items-center justify-content-center gap-2 gap-xl-3 bg-body rounded-2 p-2">
+                  <span class="fs-xs fw-medium text-secondary-emphasis py-1 px-sm-2">XS</span>
+                  <span class="fs-xs fw-medium text-secondary-emphasis py-1 px-sm-2">S</span>
+                  <span class="fs-xs fw-medium text-secondary-emphasis py-1 px-sm-2">M</span>
+                  <span class="fs-xs fw-medium text-secondary-emphasis py-1 px-sm-2">L</span>
+                  <div class="nav">
+                    <a class="nav-link fs-xs text-body-tertiary py-1 px-2" href="shop-product-fashion.html">+3</a>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+    
+            <!-- Product name and price -->
+            <div class="nav mb-2">
+              <a class="nav-link animate-target min-w-0 text-dark-emphasis p-0" href="shop-product-fashion.html">
+                <span class="text-truncate">{{product.name}}</span>
+              </a>
+            </div>
+            <div class="h6 mb-2">
+              {{ product.basePrice | number:'1.2-2' }} TND
+            </div>
+            <div class="position-relative">
+              <button class="btn btn-sm btn-primary" (click)="addProductToCart(product.id)">add to cart</button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="nav mb-2">
-      <a class="nav-link animate-target min-w-0 text-dark-emphasis p-0" href="shop-product-fashion.html">
-        <span class="text-truncate">{{product.name}}</span>
-      </a>
-    </div>
-    <div class="h6 mb-2">${{product.basePrice}} <del class="fs-sm fw-normal text-body-tertiary">$156.00</del></div>
-    <div class="position-relative">
-     <button class="btn btn-sm btn-primary" (click)="addProductToCart(product.id)">add to cart</button>
-    </div>
-  </div>
-</div>
       }
-      
-
     </div>
+    
   </section>
 
 

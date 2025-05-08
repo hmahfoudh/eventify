@@ -12,7 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProducteditComponent } from './product-edit/product-edit.component';  
 import { ProductService } from './services/product.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { authInterceptorProviders } from './auth.interceptor'; // ✅ Interceptor provider
+import { authInterceptorProviders } from './auth.interceptor';
+import { CartComponent } from './cart/cart.component'; // ✅ Interceptor provider
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { authInterceptorProviders } from './auth.interceptor'; // ✅ Intercepto
     LoginComponent,
     SignupComponent,
     ProducteditComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

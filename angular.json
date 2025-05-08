@@ -37,7 +37,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/icons/cartzilla-icons.min.scss"
+              
             ],
             "scripts": [],
             "server": "src/main.server.ts",

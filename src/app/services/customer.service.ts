@@ -51,36 +51,24 @@ export class CustomerService {
   }
 
 // 3. Add product to cart
-addProductToCart(
-  productId: number,
-  productName: string,
-  productDescription: string,
-  quantity: number,
-  image: any,
-  dateAdded: string,
-  orderDate: string,
-  userId?: number // Add the 8th argument (userId)
-): Observable<any> {
+addProductToCart(productId: number): Observable<any> {
   let cartDto = {
     productId: productId,
-    userId: userId,  // Use the passed userId
-    productName: productName,
-    productDescription: productDescription,
-    quantity: quantity,
-    image: {
-      name: image.name,
-      url: image.url,
-      extension: image.extension,
-      type: image.type
-    },
-    dateAdded: dateAdded,
-    orderDate: orderDate
+    userId: LocalStorageService.getUserId()
   };
 
-  return this.http.post<[]>(BASIC_URL + "api/customer/cart", cartDto, {
+  return this.http.post<any>(BASIC_URL + "api/customer/cart", cartDto, {
     headers: this.createAuthorizationHeader()
   });
 }
+
+getCartByUserId():Observable<any>{
+  return this.http.get(BASIC_URL+"api/customer/cart/"+LocalStorageService.getUserId(),{
+    headers:this.createAuthorizationHeader()
+  })
+}
+
+
 
 
 }

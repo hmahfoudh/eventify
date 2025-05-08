@@ -32,7 +32,7 @@ export class LocalStorageService {
     window.localStorage.setItem(USER, JSON.stringify(user));
   }
 
-  public getUser(): any {
+  static getUser(): any {
     const rawUser = localStorage.getItem(USER);
     return rawUser ? JSON.parse(rawUser) : null;
   }
@@ -41,13 +41,13 @@ export class LocalStorageService {
    * Get user ID from localStorage
    * Returns null if ID is not found or invalid
    */
-  public getUserId(): number | null {
+  static getUserId(): number | null {
     const user = this.getUser();
     // Ensure the user has a valid 'id' and it's a number
     return user && typeof user.id === 'number' ? user.id : null;
   }
 
-  public getUserRole(): string {
+  static getUserRole(): string {
     const user = this.getUser();
     return user?.role ?? '';
   }
