@@ -4,6 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { ProducteditComponent } from './product-edit/product-edit.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,8 @@ const routes: Routes = [
     path:'product/add',
     component: ProducteditComponent
   },
+  { path: 'product/:id', component: ProductDetailComponent },
+  { path: 'checkout', component: CheckoutComponent },
   {
     path: '',
     redirectTo: 'home',

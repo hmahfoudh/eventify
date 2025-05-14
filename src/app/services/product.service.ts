@@ -3,12 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Product } from '../models/product';
+import { Services } from '../models/services';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   private apiUrl = 'http://localhost:8080/api/products'; 
+  private baseUrl = 'http://localhost:8080/api/services';
 
   constructor(private http: HttpClient) {}
 
@@ -39,7 +41,9 @@ export class ProductService {
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl);
   }
-
+  getServices(): Observable<Services[]> {
+    return this.http.get<Services[]>(this.baseUrl);
+  }
   // Method to fetch product by name
   getProductByName(productName: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${productName}`); // Corrected URL
@@ -48,4 +52,10 @@ export class ProductService {
     getProductImage(productName: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${productName}/image`);
   }
+
+
+  getProductById(productId: string | number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${productId}`);
+  }
+ 
 }

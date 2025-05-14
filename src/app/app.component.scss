@@ -1,0 +1,20 @@
+// Centrage correct du contenu des toasts
+.toast-container .ngx-toastr {
+    text-align: center;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  // Style pour le toast de succès
+  .toast-success {
+    background-color: #28a745 !important; // vert succès
+    color: #ffffff !important;
+    box-shadow: 6px 12px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  // Optionnel : style pour le bouton de fermeture
+  .toast-success .toast-close-button {
+    color: #fff !important;
+  }
+  

@@ -12,8 +12,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProducteditComponent } from './product-edit/product-edit.component';  
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { ProductService } from './services/product.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { authInterceptorProviders } from './auth.interceptor'; // ✅ Interceptor provider
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { authInterceptorProviders } from './auth.interceptor';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component'; // ✅ Interceptor provider
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +29,9 @@ import { authInterceptorProviders } from './auth.interceptor'; // ✅ Intercepto
     LoginComponent,
     SignupComponent,
     ProducteditComponent,
+    ProductDetailComponent,
+    CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,12 +40,19 @@ import { authInterceptorProviders } from './auth.interceptor'; // ✅ Intercepto
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzNotificationModule
+    NzNotificationModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({    // ← Configuration globale
+      positionClass: 'toast-top-center',
+      timeOut: 3000,
+      preventDuplicates: true
+    }),
+    
   ],
   providers: [
     provideClientHydration(),
     ProductService,
-    authInterceptorProviders // ✅ Registering the interceptor here only
+    authInterceptorProviders ,// ✅ Registering the interceptor here only
   ],
   bootstrap: [AppComponent]
 })

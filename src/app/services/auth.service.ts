@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface SignupRequest {
   firstName: string;
@@ -29,7 +29,8 @@ export interface JwtResponse {
 })
 export class AuthService {
   private authUrl = 'http://localhost:8080/api/auth';
-
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.getToken() !== null);
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
   constructor(private http: HttpClient) {}
 
   /**
@@ -44,16 +45,19 @@ export class AuthService {
    */
   login(data: LoginRequest): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(`${this.authUrl}/signin`, data);
+    this.isLoggedInSubject.next(true);
   }
 
   /**
    * Logs out by clearing token and user data
    */
+  
   logout(): void {
-    localStorage.removeItem('auth-token');
-    localStorage.removeItem('auth-user');
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.removeItem('auth-token');
+      localStorage.removeItem('auth-user');
+    }
   }
-
   /**
    * Save JWT token to localStorage
    */
@@ -93,8 +97,11 @@ export class AuthService {
    * Get user details from localStorage
    */
   getUser(): any {
-    const user = localStorage.getItem('auth-user');
-    return user ? JSON.parse(user) : null;
+    if (typeof window !== 'undefined' && localStorage) {
+      const user = localStorage.getItem('auth-user');
+      return user ? JSON.parse(user) : null;
+    }
+    return null;
   }
 
   /**

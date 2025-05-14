@@ -1,0 +1,46 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="submitOrder()">
+    <!-- Champs du formulaire -->
+    <div class="mb-3">
+      <label for="firstName" class="form-label">Prénom</label>
+      <input type="text" class="form-control" id="firstName" formControlName="firstName">
+    </div>
+  
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Nom</label>
+      <input type="text" class="form-control" id="lastName" formControlName="lastName">
+    </div>
+  
+    <div class="mb-3">
+      <label for="address" class="form-label">Adresse de livraison</label>
+      <input type="text" class="form-control" id="address" formControlName="address">
+    </div>
+  
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+    </div>
+  
+    <div class="mb-3">
+      <label for="phone" class="form-label">Téléphone</label>
+      <input type="text" class="form-control" id="phone" formControlName="phone">
+    </div>
+  
+    <div class="mb-3">
+      <label for="deliveryType" class="form-label">Type de livraison</label>
+      <select class="form-select" id="deliveryType" formControlName="deliveryType">
+        <option value="domicile">À domicile</option>
+        <option value="agence">En agence</option>
+      </select>
+    </div>
+  
+    <!-- Montant total -->
+    <div class="mb-3">
+      <strong>Total à payer : {{ totalAmount | currency:'EUR' }}</strong>
+    </div>
+  
+    <!-- Bouton de soumission -->
+    <button type="submit" class="btn btn-success w-100" [disabled]="checkoutForm.invalid">
+        Valider la commande
+      </button>
+  </form>
+  
