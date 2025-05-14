@@ -10,6 +10,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProducteditComponent } from './product-edit/product-edit.component';  
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { ProductService } from './services/product.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { authInterceptorProviders } from './auth.interceptor';
@@ -33,6 +34,7 @@ import { CartComponent } from './cart/cart.component'; // ✅ Interceptor provid
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NzNotificationModule
   ],
   providers: [
     provideClientHydration(),

@@ -10,45 +10,53 @@ export class LocalStorageService {
 
   constructor() {}
 
+  private static isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+  }
+
+  // ========== INSTANCE METHODS ==========
+
   public saveToken(token: string): void {
-    window.localStorage.removeItem(TOKEN);
-    window.localStorage.setItem(TOKEN, token);
+    if (LocalStorageService.isBrowser()) {
+      localStorage.removeItem(TOKEN);
+      localStorage.setItem(TOKEN, token);
+    }
   }
 
   public hasToken(): boolean {
     return this.getToken() !== null;
   }
 
-  getToken(): string | null {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('auth-token');
+  public getToken(): string | null {
+    if (LocalStorageService.isBrowser()) {
+      return localStorage.getItem(TOKEN);
     }
     return null;
   }
-  
 
   public saveUser(user: any): void {
-    window.localStorage.removeItem(USER);
-    window.localStorage.setItem(USER, JSON.stringify(user));
+    if (LocalStorageService.isBrowser()) {
+      localStorage.removeItem(USER);
+      localStorage.setItem(USER, JSON.stringify(user));
+    }
   }
 
-  static getUser(): any {
-    const rawUser = localStorage.getItem(USER);
-    return rawUser ? JSON.parse(rawUser) : null;
-  }
+  // ========== STATIC METHODS ==========
 
-  /**
-   * Get user ID from localStorage
-   * Returns null if ID is not found or invalid
-   */
-  static getUserId(): number | null {
-    const user = this.getUser();
-    // Ensure the user has a valid 'id' and it's a number
-    return user && typeof user.id === 'number' ? user.id : null;
-  }
+static getUser(): any {
+  if (typeof window === 'undefined') return null;
+  const rawUser = localStorage.getItem(USER);
+  return rawUser ? JSON.parse(rawUser) : null;
+}
 
-  static getUserRole(): string {
-    const user = this.getUser();
-    return user?.role ?? '';
-  }
+static getUserId(): number | null {
+  const user = this.getUser();
+  return user && typeof user.id === 'number' ? user.id : null;
+}
+
+static getUserRole(): string {
+  const user = this.getUser();
+  return Array.isArray(user?.roles) && user.roles.length > 0 ? user.roles[0] : '';
+}
+
 }

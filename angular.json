@@ -38,7 +38,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/icons/cartzilla-icons.min.scss"
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
               
             ],
             "scripts": [],

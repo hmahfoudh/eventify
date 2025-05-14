@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../services/customer.service';
-
+import { LocalStorageService } from '../services/local-storage.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -17,13 +17,29 @@ export class CartComponent implements OnInit {
     this.getCart();
   }
 
-  getCart(): void {
-    this.service.getCartByUserId().subscribe((res) => {
-      console.log(res);
+getCart(): void {
+  const userId = LocalStorageService.getUserId();
+
+  if (userId === null) {
+    console.error('User is not logged in or ID is missing in localStorage');
+    return;
+  }
+
+  this.service.getCartByUserId().subscribe({
+    next: (res) => {
+      console.log("📦 Cart Response:", res); 
       this.cartProducts = res.cartItemDtoList;
       this.totalAmount = res.totalAmount;
-    });
-  }
+      console.log('Cart Products:', this.cartProducts);  // Check if the cart data is set correctly
+      console.log('Total Amount:', this.totalAmount);
+    },
+    error: (err) => {
+      console.error('Error fetching cart:', err);
+    }
+  });
+}
+
+
 
   incrementQuantity(product: any): void {
     product.quantity++;

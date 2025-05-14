@@ -139,7 +139,8 @@
             <p class="fs-sm pb-1">To apply the provided styles to your webpage, enclose them within a
                 <code>&lt;style&gt;</code> tag and insert this tag into the <code>&lt;head&gt;</code> section of your
                 HTML document after the following link to the main
-                stylesheet:<br><code>&lt;link href="/assets/css/theme.min.css"&gt;</code></p>
+                stylesheet:<br><code>&lt;link href="/assets/css/theme.min.css"&gt;</code>
+            </p>
             <div class="position-relative bg-body-tertiary rounded overflow-hidden pt-3">
                 <div class="position-absolute top-0 start-0 w-100 p-3">
                     <button type="button" class="btn btn-sm btn-outline-dark w-100"
@@ -402,7 +403,7 @@
                     class="theme-switcher btn btn-icon btn-lg btn-outline-secondary fs-lg border-0 rounded-circle animate-scale"
                     data-bs-toggle="dropdown" aria-expanded="false" aria-label="Toggle theme (light)">
                     <span class="theme-icon-active d-flex animate-target">
-                        <i class="ci-sun"></i>
+                        <i class="fas fa-sun"></i> <!-- Icône par défaut (light) -->
                     </span>
                 </button>
                 <ul class="dropdown-menu" style="--cz-dropdown-min-width: 9rem">
@@ -410,28 +411,28 @@
                         <button type="button" class="dropdown-item active" data-bs-theme-value="light"
                             aria-pressed="true">
                             <span class="theme-icon d-flex fs-base me-2">
-                                <i class="ci-sun"></i>
+                                <i class="fas fa-sun"></i>
                             </span>
                             <span class="theme-label">Light</span>
-                            <i class="item-active-indicator ci-check ms-auto"></i>
+                            <i class="item-active-indicator fas fa-check ms-auto"></i>
                         </button>
                     </li>
                     <li>
                         <button type="button" class="dropdown-item" data-bs-theme-value="dark" aria-pressed="false">
                             <span class="theme-icon d-flex fs-base me-2">
-                                <i class="ci-moon"></i>
+                                <i class="fas fa-moon"></i>
                             </span>
                             <span class="theme-label">Dark</span>
-                            <i class="item-active-indicator ci-check ms-auto"></i>
+                            <i class="item-active-indicator fas fa-check ms-auto"></i>
                         </button>
                     </li>
                     <li>
                         <button type="button" class="dropdown-item" data-bs-theme-value="auto" aria-pressed="false">
                             <span class="theme-icon d-flex fs-base me-2">
-                                <i class="ci-auto"></i>
+                                <i class="fas fa-adjust"></i> <!-- "Auto" thème -->
                             </span>
                             <span class="theme-label">Auto</span>
-                            <i class="item-active-indicator ci-check ms-auto"></i>
+                            <i class="item-active-indicator fas fa-check ms-auto"></i>
                         </button>
                     </li>
                 </ul>
@@ -439,35 +440,35 @@
 
             <!-- Search toggle button visible on screens < 992px wide (lg breakpoint) -->
             <button type="button"
-                class="btn btn-icon btn-lg fs-xl btn-outline-secondary border-0 rounded-circle animate-shake d-lg-none"
+                class="btn btn-icon btn-lg fs-xl btn-outline-secondary border-0 rounded-circle d-none d-lg-inline-flex"
                 data-bs-toggle="offcanvas" data-bs-target="#searchBox" aria-controls="searchBox"
                 aria-label="Toggle search bar">
-                <i class="ci-search animate-target"></i>
+                <i class="fas fa-search animate-target"></i>
             </button>
 
             <!-- Account button visible on screens > 768px wide (md breakpoint) -->
             <a class="btn btn-icon btn-lg fs-lg btn-outline-secondary border-0 rounded-circle animate-shake d-none d-md-inline-flex"
                 href="account-signin.html">
-                <i class="ci-user animate-target"></i>
+                <i class="fas fa-user animate-target"></i>
                 <span class="visually-hidden">Account</span>
             </a>
 
             <!-- Wishlist button visible on screens > 768px wide (md breakpoint) -->
             <a class="btn btn-icon btn-lg fs-lg btn-outline-secondary border-0 rounded-circle animate-pulse d-none d-md-inline-flex"
                 href="#!">
-                <i class="ci-heart animate-target"></i>
+                <i class="fas fa-heart animate-target"></i>
                 <span class="visually-hidden">Wishlist</span>
             </a>
 
             <!-- Cart button -->
-            <button type="button"
-                class="btn btn-icon btn-lg fs-xl btn-outline-secondary position-relative border-0 rounded-circle animate-scale"
-                data-bs-toggle="offcanvas" data-bs-target="#shoppingCart" aria-controls="shoppingCart"
-                aria-label="Shopping cart">
-                <span class="position-absolute top-0 start-100 badge fs-xs text-bg-primary rounded-pill mt-1 ms-n4 z-2"
-                    style="--cz-badge-padding-y: .25em; --cz-badge-padding-x: .42em">3</span>
-                    <i class="ci-shopping-cart"></i>
-            </button>
+         <button type="button"
+    class="btn btn-icon btn-lg fs-xl btn-outline-secondary position-relative border-0 rounded-circle animate-scale"
+    [routerLink]="'/cart'" aria-label="Shopping cart">
+    <span class="position-absolute top-0 start-100 badge fs-xs text-bg-primary rounded-pill mt-1 ms-n4 z-2"
+        style="--cz-badge-padding-y: .25em; --cz-badge-padding-x: .42em">3</span>
+    <i class="fas fa-shopping-bag animate-target me-1"></i>
+         </button>
+
         </div>
     </div>
 
@@ -541,7 +542,7 @@
                                 <button type="button" class="nav-link animate-underline fw-semibold text-uppercase ps-0"
                                     data-bs-toggle="dropdown" data-bs-trigger="hover" data-bs-auto-close="outside"
                                     aria-expanded="false">
-                                    <i class="ci-menu fs-lg me-2"></i>
+                                    <i class="fas fa-bars fs-lg me-2"></i> <!-- Icône menu (bars) -->
                                     <span class="animate-target">Categories</span>
                                 </button>
                                 <div class="dropdown-menu w-100 p-4 px-xl-5" style="--cz-dropdown-spacer: .75rem">
@@ -1344,7 +1345,7 @@
                                             Pages</a>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" [routerLink]="'/login'">Sign In</a></li>
-                                            <li><a class="dropdown-item"  [routerLink]="'/signup'">Sign Up</a></li>
+                                            <li><a class="dropdown-item" [routerLink]="'/signup'">Sign Up</a></li>
                                             <li><a class="dropdown-item" href="account-password-recovery.html">Password
                                                     Recovery</a></li>
                                         </ul>
@@ -1472,9 +1473,10 @@
                             class="btn btn-outline-secondary justify-content-start w-100 px-3 mb-lg-2 ms-3 d-none d-lg-inline-flex"
                             style="max-width: 240px" data-bs-toggle="offcanvas" data-bs-target="#searchBox"
                             aria-controls="searchBox">
-                            <i class="ci-search fs-base ms-n1 me-2"></i>
+                            <i class="fas fa-search fs-base ms-n1 me-2"></i> <!-- Icône de recherche Font Awesome -->
                             <span class="text-body-tertiary fw-normal">Search</span>
                         </button>
+
                     </div>
                 </div>
             </div>
