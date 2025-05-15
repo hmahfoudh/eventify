@@ -1,0 +1,29 @@
+<div class="container my-5">
+    <div class="row shadow rounded overflow-hidden">
+      <!-- Booking Form (Left) -->
+      <div class="col-md-6 bg-white p-5">
+        <h3 class="mb-4 text-primary">Book a Visit</h3>
+        <form (ngSubmit)="submitBooking()" #bookingForm="ngForm">
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Full Name</label>
+            <input class="form-control form-control-lg rounded-3" [(ngModel)]="bookingData.customerName" name="customerName" required placeholder="Enter your full name">
+          </div>
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Phone Number</label>
+            <input class="form-control form-control-lg rounded-3" [(ngModel)]="bookingData.userContact" name="userContact" required placeholder="Enter your phone number">
+          </div>
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Appointment Date</label>
+            <input type="datetime-local" class="form-control form-control-lg rounded-3" [(ngModel)]="bookingData.bookingDate" name="bookingDate" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Confirm Booking</button>
+        </form>
+      </div>
+  
+      <!-- Product Image (Right) -->
+      <div class="col-md-6 p-0">
+        <img *ngIf="product" [src]="imageUrl + product.categoryImages[0]?.url" class="img-fluid w-100 h-100 object-fit-cover" alt="Product image" style="object-fit: cover;">
+      </div>
+    </div>
+  </div>
+  

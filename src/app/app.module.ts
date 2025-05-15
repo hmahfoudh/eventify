@@ -18,6 +18,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component'; // ✅ Interceptor provider
 import { ToastrModule } from 'ngx-toastr';
+import { BookingComponent } from './booking/booking.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
     ProductDetailComponent,
     CartComponent,
     CheckoutComponent,
+    BookingComponent,
   ],
   imports: [
     BrowserModule,

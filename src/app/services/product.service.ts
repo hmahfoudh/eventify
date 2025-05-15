@@ -57,5 +57,9 @@ export class ProductService {
   getProductById(productId: string | number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${productId}`);
   }
+
+  getServiceById(productId: string | number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${productId}`);
+  }
  
 }

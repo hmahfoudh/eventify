@@ -7,6 +7,8 @@ export class Services {
     name: string;
     description: string;
     basePrice: number;
+    contactService:String;
+    serviceAddress:String;
     categoryImages: Media[];
     category: Category;
 

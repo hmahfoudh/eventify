@@ -13,7 +13,7 @@ import { CartService } from '../services/cart.service';
 })
 export class HomeComponent implements OnInit {
 
-  public products: any[] = [];
+ 
   public services: any[] = [];
   public imageUrl: string = 'http://localhost:8080'; // Base URL for product images
   quantity = 1;
@@ -30,18 +30,42 @@ export class HomeComponent implements OnInit {
   ) {}
 
   public selectedCategory: string = '';
+  public selectedServiceCat: string = '';
   public filteredProducts: any[] = [];
-  filterProductsByCategory(category: string) {
+  public products: any[] = [];
+  public filteredServices: any[] = [];
+
+  filterProductsByCategory(category: string): void {
     this.selectedCategory = category;
-    this.filteredProducts = this.products.filter(
-      p => p.category?.name === category
-    );
+  
+    if (!category || category.trim() === '') {
+      // Si "All" est sélectionné, on affiche tous les produits
+      this.filteredProducts = this.products;
+    } else {
+      // Sinon on filtre selon la catégorie
+      this.filteredProducts = this.products.filter(
+        p => p.category?.name?.toLowerCase() === category.toLowerCase()
+      );
+    }
+  }
+  filterServicesByCategory(category: string): void {
+    this.selectedServiceCat = category;
+  
+    if (!category || category.trim() === '') {
+      // Si "All" est sélectionné, on affiche tous les produits
+      this.filteredServices = this.services;
+    } else {
+      // Sinon on filtre selon la catégorie
+      this.filteredServices = this.services.filter(
+        p => p.category?.name?.toLowerCase() === category.toLowerCase()
+      );
+    }
   }
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data;
-        this.filterProductsByCategory('bridal flower'); // default category
+        this.filteredProducts = data;// default category
       },
       error: (err) => {
         console.error('Error fetching products:', err);
@@ -51,6 +75,7 @@ export class HomeComponent implements OnInit {
     this.productService.getServices().subscribe({
       next: (data) => {
         this.services = data;
+        this.filteredServices=data
       },
       error: (err) => {
         console.error('Error fetching services:', err);
